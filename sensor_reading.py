@@ -26,9 +26,8 @@ import logging
 from scp import SCPClient
 from paramiko import SSHClient
 
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
 logging.basicConfig(
-    filename="/home/pi/custom_script/sensor.log"
+    filename="/home/pi/custom_script/sensor.log",
     format='%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s',
     level=logging.INFO,
     datefmt='%Y-%m-%d %H:%M:%S')
