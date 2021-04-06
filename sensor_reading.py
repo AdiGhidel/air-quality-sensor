@@ -108,9 +108,9 @@ def write_to_file(val):
     filename = str(int(time.time()))
     filename = "/home/pi/data/"+filename
     with open(filename, 'w') as writer:
-        writer.write(time.strftime("%Y/%m/%d-%H:%M:%S\n"))
+        writer.write(time.strftime(" %Y/%m/%d-%H:%M:%S\n\n"))
         for el in val:
-            writer.write("{}:{}\n".format(el[0], el[1]))
+            writer.write("{:>12}: {}\n".format(el[0], el[1]))
     logging.info("Written to %s", filename)
     return filename
 
@@ -126,7 +126,7 @@ def copy_file(filename):
     
 # Tuning factor for compensation. Decrease this number to adjust the
 # temperature down, and increase to adjust up
-factor = 2.25
+factor = 2.5
 
 cpu_temps = [get_cpu_temperature()] * 5
 
@@ -151,7 +151,7 @@ for v in variables:
     values[v] = [1] * WIDTH
 
 output = []
-readings = 5    
+readings = 5
 readings_air = 10
 # The main loop
 try:
