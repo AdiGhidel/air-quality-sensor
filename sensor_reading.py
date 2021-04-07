@@ -127,7 +127,7 @@ def copy_file(filename):
     
 # Tuning factor for compensation. Decrease this number to adjust the
 # temperature down, and increase to adjust up
-factor = 2.5
+factor = 2.55
 cpu_temps = [get_cpu_temperature()] * 5
 delay = 0.3  
 
