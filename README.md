@@ -49,6 +49,10 @@ Other power optimisations don't work
 
 The sensor will update the txt data for usage to a remote location (in my case a rpi with conky configured )
 
+### Original sensor code
+This didn't work for me as it loops continuosly (it can also change values on tap)  
+[Pimoroni](https://github.com/pimoroni/enviroplus-python)
+
 # Arduino setup
 - uses 1/2 frequency (this means most stuff must be divided by 2 (seconds / baud rate))
 - use deep sleep for efficient power mgmt
