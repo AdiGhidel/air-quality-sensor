@@ -43,7 +43,6 @@ void sleepOne(int seconds) {
 }
 
 void setup() {
-  Serial.begin(9600);
   CLKPR = 0x80; // (1000 0000) enable change in clock frequency
   CLKPR = 0x01; // (0000 0001) use clock division factor 2 to reduce the frequency from 16 MHz to 8 MHz
   ADCSRA |= (1 << ADEN);
@@ -52,14 +51,13 @@ void setup() {
   int turnedon = 1;
   int isUp = EEPROM.read(addr);
   if (isUp == 0) {
-    Serial.println("was down, going up");
     up(248 / CPU_FACTOR);
   }
   sleepOne(1);
 }
 
 void loop() {
-  down(285 / CPU_FACTOR);
+  down(300 / CPU_FACTOR);
   sleepFor(210);
   up(248 / CPU_FACTOR);
   sleepFor(1800);
