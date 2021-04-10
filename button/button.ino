@@ -3,12 +3,13 @@
 
 #define DEFAULT_SLEEP 8
 
-#define L 13
-#define R 10
+#define L 2
+#define R 13
 #define CPU_FACTOR 2
 int addr = 0;
 
-
+#define DOWN 320
+#define UP 280
 void up(int ms) {
   EEPROM.write(addr, 1);
   digitalWrite(L, LOW);
@@ -16,6 +17,7 @@ void up(int ms) {
   delay(ms);
   digitalWrite(L, LOW);
   digitalWrite(R, LOW);
+  delay(100);
 }
 
 void down(int ms) {
@@ -25,6 +27,7 @@ void down(int ms) {
   delay(ms);
   digitalWrite(L, LOW);
   digitalWrite(R, LOW);
+  delay(100);
 }
 
 void sleepFor(int seconds) {
@@ -43,22 +46,25 @@ void sleepOne(int seconds) {
 }
 
 void setup() {
+  delay(3000);
   CLKPR = 0x80; // (1000 0000) enable change in clock frequency
   CLKPR = 0x01; // (0000 0001) use clock division factor 2 to reduce the frequency from 16 MHz to 8 MHz
   ADCSRA |= (1 << ADEN);
   pinMode(L, OUTPUT);
   pinMode(R, OUTPUT);
-  int turnedon = 1;
   int isUp = EEPROM.read(addr);
   if (isUp == 0) {
-    up(248 / CPU_FACTOR);
+    Serial.println("going up");
+    up(UP / CPU_FACTOR);
   }
-  sleepOne(1);
+  delay(1000);
 }
 
 void loop() {
-  down(300 / CPU_FACTOR);
+  Serial.println("started loop");
+  down(DOWN / CPU_FACTOR);
   sleepFor(210);
-  up(248 / CPU_FACTOR);
+  Serial.println("going down");
+  up(UP / CPU_FACTOR);
   sleepFor(1800);
 }
