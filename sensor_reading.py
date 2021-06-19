@@ -6,6 +6,7 @@ import sys
 import ST7735
 import decimal
 import os
+import boto3
 
 try:
     # Transitional fix for breaking change in LTR559
@@ -124,6 +125,10 @@ def copy_file(filename):
     with SCPClient(ssh.get_transport()) as scp:
         scp.put(filename, '/home/pi/sensor_data/data.txt') # keep history local
         scp.close()
+
+def write_to_s3(filename):
+    s3 = boto3.resource('s3')
+    s3.Bucket('bucket').upload_file(filename, os.path.basename(filename))
     
 # Tuning factor for compensation. Decrease this number to adjust the
 # temperature down, and increase to adjust up
@@ -287,6 +292,7 @@ try:
 
     filename = write_to_file(list(zip(variables,output)))
     copy_file(filename)
+    write_to_s3(filename)
     
 
 # Exit cleanly
