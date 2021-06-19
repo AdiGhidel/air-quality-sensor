@@ -154,9 +154,10 @@ readings = 5
 readings_air = 10
 # The main loop
 try:
-    time.sleep(delay)
     # variable = "temperature"
     avg_data = 0
+    bme280.get_temperature()
+    time.sleep(delay)
     for i in range(readings):
         unit = "C"
         cpu_temp = get_cpu_temperature()
