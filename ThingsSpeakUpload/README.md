@@ -1,5 +1,5 @@
 ## Watcher script
-- it detects changes to the to_upload file and pushes the data to ThingsSpeaks
+- it detects changes to the to_upload folder and pushes the data to ThingsSpeaks
 - the file is cleared afterward
 
 ### Service file location
