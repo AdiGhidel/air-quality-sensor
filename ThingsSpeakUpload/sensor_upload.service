@@ -1,0 +1,7 @@
+[Unit]
+Description=Upload sensor data remotely
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/bin/sensor_upload.sh
+[Install]
+WantedBy=multi-user.target
